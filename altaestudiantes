@@ -1,0 +1,103 @@
+# Clase que representa a un estudiante
+class Estudiante:
+
+    # Constructor
+    def __init__(self, nombre, matricula, edad, carrera):
+        self.nombre = nombre
+        self.matricula = matricula
+        self.edad = edad
+        self.carrera = carrera
+
+    # Método para mostrar información del estudiante
+    def mostrar_info(self):
+        print("Nombre:", self.nombre)
+        print("Matrícula:", self.matricula)
+        print("Edad:", self.edad)
+        print("Carrera:", self.carrera)
+        print("---------------------------")
+
+
+# Clase que administra el sistema de estudiantes
+class SistemaEstudiantes:
+
+    def __init__(self):
+        self.lista_estudiantes = []
+
+    # Método para agregar estudiante
+    def agregar_estudiante(self, estudiante):
+        self.lista_estudiantes.append(estudiante)
+        print("Estudiante agregado correctamente.\n")
+
+    # Mostrar todos los estudiantes
+    def mostrar_estudiantes(self):
+        if len(self.lista_estudiantes) == 0:
+            print("No hay estudiantes registrados.\n")
+        else:
+            for estudiante in self.lista_estudiantes:
+                estudiante.mostrar_info()
+
+    # Buscar estudiante por matrícula
+    def buscar_estudiante(self, matricula):
+        for estudiante in self.lista_estudiantes:
+            if estudiante.matricula == matricula:
+                print("Estudiante encontrado:\n")
+                estudiante.mostrar_info()
+                return
+        print("Estudiante no encontrado.\n")
+
+    # Eliminar estudiante
+    def eliminar_estudiante(self, matricula):
+        for estudiante in self.lista_estudiantes:
+            if estudiante.matricula == matricula:
+                self.lista_estudiantes.remove(estudiante)
+                print("Estudiante eliminado.\n")
+                return
+        print("No se encontró la matrícula.\n")
+
+
+# Programa principal con menú
+def main():
+
+    sistema = SistemaEstudiantes()
+
+    while True:
+
+        print("===== SISTEMA DE ESTUDIANTES =====")
+        print("1. Agregar estudiante")
+        print("2. Mostrar estudiantes")
+        print("3. Buscar estudiante")
+        print("4. Eliminar estudiante")
+        print("5. Salir")
+
+        opcion = input("Seleccione una opción: ")
+
+        if opcion == "1":
+            nombre = input("Nombre: ")
+            matricula = input("Matrícula: ")
+            edad = int(input("Edad: "))
+            carrera = input("Carrera: ")
+
+            estudiante = Estudiante(nombre, matricula, edad, carrera)
+            sistema.agregar_estudiante(estudiante)
+
+        elif opcion == "2":
+            sistema.mostrar_estudiantes()
+
+        elif opcion == "3":
+            matricula = input("Ingrese la matrícula: ")
+            sistema.buscar_estudiante(matricula)
+
+        elif opcion == "4":
+            matricula = input("Ingrese la matrícula a eliminar: ")
+            sistema.eliminar_estudiante(matricula)
+
+        elif opcion == "5":
+            print("Saliendo del sistema...")
+            break
+
+        else:
+            print("Opción inválida.\n")
+
+
+# Ejecutar programa
+main()
